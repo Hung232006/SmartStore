@@ -42,7 +42,8 @@ public class MainMenu {
 
                 case 4:
                     System.out.println("Đăng xuất thành công!");
-                    break;
+                    new LoginMenu().menu();
+                    return;
 
                 default:
                     System.out.println("Lựa chọn không hợp lệ!");

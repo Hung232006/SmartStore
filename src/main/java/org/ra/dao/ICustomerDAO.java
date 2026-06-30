@@ -16,4 +16,6 @@ public interface ICustomerDAO {
     boolean showCustomer(int id);
 
     boolean existsByEmail(String email);
+
+    Customer login(String email, String password);
 }

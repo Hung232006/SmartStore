@@ -14,7 +14,7 @@ public interface IInvoiceDAO {
 
     void searchInvoice(int id);
 
-    double getTotalRevenue();
+    double revenueStatistics();
 
     boolean createInvoice(Invoice invoice, InvoiceDetail detail);
 }

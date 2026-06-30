@@ -4,6 +4,7 @@ import org.ra.dao.CustomerDAO;
 import org.ra.dao.ICustomerDAO;
 import org.ra.model.entity.Customer;
 import org.ra.model.entity.Product;
+import org.ra.util.Validation;
 
 import java.util.List;
 
@@ -65,4 +66,19 @@ public class CustomerBUS {
         public Customer findById(int id) {
             return customerDAO.findById(id);
         }*/
+    // đăng nhập ccuar admin
+        public Customer login(String email, String password) {
+
+            Customer customer = customerDAO.login(email ,  password);
+
+            if (customer == null) {
+                return null;
+            }
+
+            if (Validation.checkPassword(password, customer.getPassword())) {
+                return customer;
+            }
+
+            return null;
+        }
 }

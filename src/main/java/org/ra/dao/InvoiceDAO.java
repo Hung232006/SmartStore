@@ -132,10 +132,55 @@ public class InvoiceDAO implements IInvoiceDAO {
     @Override
     public void searchInvoice(int id) {
 
+        String sql = "SELECT * FROM invoices WHERE id = ?";
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                System.out.println("========== THÔNG TIN HÓA ĐƠN ==========");
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("ID Khách hàng: " + rs.getInt("customer_id"));
+                System.out.println("Ngày tạo: " + rs.getTimestamp("created_at"));
+                System.out.println("Tổng tiền: " + rs.getDouble("total_amount"));
+
+            } else {
+                System.out.println("Không tìm thấy hóa đơn!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public double getTotalRevenue() {
+    public double revenueStatistics() {
+
+        String sql = "SELECT SUM(total_amount) AS revenue FROM invoices";
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+        ) {
+
+            if (rs.next()) {
+                double revenue = rs.getDouble("revenue");
+
+                System.out.println("========== THỐNG KÊ DOANH THU ==========");
+                System.out.printf("Tổng doanh thu: %,.2f VNĐ%n", revenue);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }

@@ -73,12 +73,7 @@ public class InvoiceBUS {
     // ====================== Thống kê doanh thu ======================
 
     public void revenueStatistics() {
-
-        double totalRevenue = invoiceDAO.getTotalRevenue();
-
-        System.out.println("========================================");
-        System.out.printf("TỔNG DOANH THU: %,.2f VNĐ%n", totalRevenue);
-        System.out.println("========================================");
+        invoiceDAO.revenueStatistics();
     }
 
 }

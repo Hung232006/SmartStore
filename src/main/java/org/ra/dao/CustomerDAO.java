@@ -164,7 +164,11 @@ public class CustomerDAO implements ICustomerDAO {
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            if ("23503".equals(e.getSQLState())) {
+                System.out.println("Không thể xóa khách hàng vì đã có hóa đơn.");
+            } else {
+                e.printStackTrace();
+            }
         }
 
         return false;
@@ -200,5 +204,39 @@ public class CustomerDAO implements ICustomerDAO {
         return false;
 
     }
-}
+    // hàm đăng nhập
+    public Customer login(String email, String password) {
 
+        String sql = "SELECT * FROM customers WHERE email = ?";
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                Customer customer = new Customer();
+
+                customer.setId(rs.getInt("id"));
+                customer.setName(rs.getString("name"));
+                customer.setPhone(rs.getString("phone"));
+                customer.setEmail(rs.getString("email"));
+                customer.setPassword(rs.getString("password")); // Lấy mật khẩu đã hash
+                customer.setRole(UserRole.valueOf(rs.getString("role")));
+                customer.setAddress(rs.getString("address"));
+
+                return customer;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+}
+}
