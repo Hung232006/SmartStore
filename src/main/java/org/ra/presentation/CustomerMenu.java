@@ -23,11 +23,11 @@ public class CustomerMenu {
 
         do {
             System.out.println("\n===== QUẢN LÝ KHÁCH HÀNG =====");
-            System.out.println("[1] Xem danh sách");
-            System.out.println("[2] Thêm mới khách hàng");
-            System.out.println("[3] Cập nhật thông tin");
-            System.out.println("[4] Xóa khách hàng");
-            System.out.println("[5] Quay lại");
+            System.out.println("1. Xem danh sách");
+            System.out.println("2. Thêm mới khách hàng");
+            System.out.println("3. Cập nhật thông tin");
+            System.out.println("4. Xóa khách hàng");
+            System.out.println("5. Quay lại");
             System.out.print("Chọn chức năng: ");
 
             choice = Integer.parseInt(sc.nextLine());

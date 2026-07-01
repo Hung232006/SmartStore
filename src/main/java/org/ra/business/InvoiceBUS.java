@@ -16,7 +16,7 @@ public class InvoiceBUS {
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final ProductDAO productDAO = new ProductDAO();
 
-    // ====================== Tạo hóa đơn ======================
+    // Tạo hóa đơn
 
     public boolean createInvoice(Invoice invoice, InvoiceDetail detail) {
 
@@ -58,19 +58,19 @@ public class InvoiceBUS {
         return invoiceDAO.createInvoice(invoice, detail);
     }
 
-    // ====================== Hiển thị tất cả hóa đơn ======================
+    //Hiển thị tất cả hóa đơn
 
     public List<Invoice> showAllInvoices() {
         return invoiceDAO.showAllInvoices();
     }
 
-    // ====================== Tìm kiếm hóa đơn ======================
+    //Tìm kiếm hóa đơn
 
     public void searchInvoice(int id) {
         invoiceDAO.searchInvoice(id);
     }
 
-    // ====================== Thống kê doanh thu ======================
+    // Thống kê doanh thu
 
     public void revenueStatistics() {
         invoiceDAO.revenueStatistics();
